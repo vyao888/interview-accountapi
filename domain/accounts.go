@@ -1,68 +1,74 @@
 package domain
 
-import (
-	"https://github.com/go-playground/validator"
-)
-
-// Status of an account
-type Status string
+// Status of an Account
+type Status int
 
 const (
-	failed
+	failed = iota
 	pending
 	confirmed
 )
 
+// Classification of an Account
+type Classification int
+
+// Account classification
+const (
+	Personal = iota
+	Business
+)
 
 // Actor of an Organization
 type Actor struct {
-	name      string
-	dob       string `validate:"datetime"`
-	residency string `validate: "uppercase, len=2"`
+	Name      string `json:"name" validate:"alpha"`
+	BirthDate string `json:"birth_date" validate:"datetime"`
+	Residency string `json:"residency" validate:"uppercase,len=2"`
 }
 
 // AccountHolder as a person
 type AccountHolder struct {
-	identification string `json:"id" validate:"unique"`
-	document_id     string `json:"documentId"`
-	birth_date      string `json:"dob" validate:"datetime"`
-	birth_country   string `json:"birthCountry" validate:"uppercase, len=2"`
-	address        []string `json:"address" validate:"alphanum"`
-	city           string `json:"city" validate:"alpha"`
-	country        string `json:"country" validate:"uppercase, len=2"`
+	Identification string   `json:"identification" validate:"unique"`
+	BirthDate      string   `json:"birth_date" validate:"datetime"`
+	BirthCountry   string   `json:"birth_country" validate:"uppercase, len=2"`
+	Address        []string `json:"address" validate:"alphanum"`
+	City           string   `json:"city" validate:"alpha"`
+	Country        string   `json:"country" validate:"uppercase, len=2"`
 }
 
 // AccountHolderAsOranization account holder
 type AccountHolderAsOranization struct {
-	accountHolder AccountHolder 
-	actors         Actor         
+	AccountHolder AccountHolder `json:"account_holder"`
+	Actor         []Actor       `json:"actors"`
 }
 
 // Relationships of the account
 type Relationships struct {
-	accountEvents []string
-	masterAccount []string
+	AccountEvents []string `json:"account_events"`
+	MasterAccount []string `json:"master_account"`
 }
 
-// Acccount details definition
+// Account details definition
 type Account struct {
-	country                    string                     `validate:"uppercase, len=2"`
-	base_currency               string                     `json:"currency" validate:"uppercase, len=3"`
-	bank_id                     string                     `json:"bankId" validate:"uppercase, max=11"`
-	bank_id_code                 string                     `json:"bankIdCode" validate:"uppercase"`
-	account_number              string                     `json:"accountNumber"`
-	bic                        string                     `validate:"alphanum, min=8, max=11"`
-	iban                       string                     `validate:"alphanum"`
-	customer_id                 string                     `json:"cunstomerId"`
-	alternative_names           [3]string                  `json:"alternativeNames" validate:"max=140"`
-	account_classification      string                     `json:"accountClassification" `
-	joint_account               bool                       `json:"jointAccount"`
-	account_matching_opt_out      bool                       `json:"accountMatchingOptOut"`
-	secondary_ientification     string                     `json:"secondaryIdentification"`
-	wwitched                   bool                       
-	status                     Status                    
-	private_identification      AccountHolder              `json:"privateIdentification"`
-	organisation_identification AccountHolderAsOranization `json:"organisationIdentification"`
-	relationships              Relationships              
+	Country                    string                     `json:"country" validate:"uppercase, len=2"`
+	BaseCurrency               string                     `json:"base_currency" validate:"uppercase, len=3"`
+	BankID                     string                     `json:"bank_id" validate:"uppercase, max=11"`
+	BankIDCode                 string                     `json:"bank_id_code" validate:"uppercase"`
+	AccountNumber              string                     `json:"account_number"`
+	BIC                        string                     `json:"bic" validate:"alphanum, min=8|11"`
+	IBAN                       string                     `json:"iban" validate:"alphanum"`
+	CustomerID                 string                     `json:"customer_id"`
+	Name                       [4]string                  `json:"name" validate:"alpha"`
+	AlternativeNames           [3]string                  `json:"alternative_names" validate:"max=140"`
+	AccountClassification      string                     `json:"account_classification" validate:"alpha"`
+	JointAccount               bool                       `json:"joint_account"`
+	AccountMatchingOptOut      bool                       `json:"account_matching_opt_out"`
+	SecondaryIdentification    string                     `json:"secondary_identification"`
+	Switched                   bool                       `json:"switched"`
+	Status                     Status                     `json:"status"`
+	PrivateIdentification      AccountHolder              `json:"private_identification"`
+	OrganisationIdentification AccountHolderAsOranization `json:"organisation_identification"`
+	Relationships              Relationships              `json:"relationships"`
 }
 
+// Accounts list
+type Accounts []*Account
