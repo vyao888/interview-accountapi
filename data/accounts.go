@@ -1,4 +1,4 @@
-package domain
+package data
 
 // Status of an Account
 type Status int
@@ -20,7 +20,7 @@ const (
 
 // Actor of an Organization
 type Actor struct {
-	Name      string `json:"name" validate:"alpha"`
+	Name      [4]string `json:"name" validate:"alpha"`
 	BirthDate string `json:"birth_date" validate:"datetime"`
 	Residency string `json:"residency" validate:"uppercase,len=2"`
 }
@@ -41,10 +41,16 @@ type AccountHolderAsOranization struct {
 	Actor         []Actor       `json:"actors"`
 }
 
+// AccountPair for capture account relationship
+type AccountPair struct {
+	Type string `json:"type" validate:"alpha"`
+	ID string `json:"id" validate:"unique"`
+}
+
 // Relationships of the account
 type Relationships struct {
-	AccountEvents []string `json:"account_events"`
-	MasterAccount []string `json:"master_account"`
+	AccountEvents []AccountPair `json:"account_events"`
+	MasterAccount []AccountPair `json:"master_account"`
 }
 
 // Account details definition

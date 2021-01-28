@@ -1,9 +1,8 @@
-package main
+package data
 
 import (
 	"fmt"
 	"regexp"
-
 	"github.com/go-playground/validator/v10"
 )
 
@@ -26,16 +25,7 @@ type Address struct {
 	Phone  string `validate:"required"`
 }
 
-// use a single instance of Validate, it caches struct info
-var validate *validator.Validate
 
-func main() {
-
-	validate = validator.New()
-
-	validateStruct()
-	validateVariable()
-}
 
 func validateStruct() {
 
@@ -56,6 +46,7 @@ func validateStruct() {
 	}
 
 	// returns nil or ValidationErrors ( []FieldError )
+	validate := NewValidator()
 	validate.RegisterValidation("datetime", validateDate)
 	err := validate.Struct(user)
 	if err != nil {
@@ -91,10 +82,14 @@ func validateStruct() {
 	// save user to database
 }
 
+func NewValidator() *validator.Validate {
+	return validator.New()
+}
+
 func validateVariable() {
 
 	myEmail := "joeybloggs@gmail.com"
-
+	validate := NewValidator()
 	errs := validate.Var(myEmail, "required,email")
 
 	if errs != nil {
