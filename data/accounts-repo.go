@@ -51,7 +51,7 @@ func GetAccounts() Accounts {
 			CustomerID:                 "",
 			Name:                       [4]string{"Samantha Holder"},
 			AlternativeNames:           [3]string{"Sam Holder"},
-			AccountClassification:      "Personal",
+			AccountClassification:      Classification(0),
 			JointAccount:               true,
 			AccountMatchingOptOut:      false,
 			SecondaryIdentification:    "A1B2C3D4",

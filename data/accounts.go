@@ -70,7 +70,7 @@ type Account struct {
 	CustomerID                 string                     `json:"customer_id"`
 	Name                       [4]string                  `json:"name" validate:"alpha"`
 	AlternativeNames           [3]string                  `json:"alternative_names" validate:"max=140"`
-	AccountClassification      string                     `json:"account_classification" validate:"alpha"`
+	AccountClassification      Classification              `json:"account_classification"`
 	JointAccount               bool                       `json:"joint_account"`
 	AccountMatchingOptOut      bool                       `json:"account_matching_opt_out"`
 	SecondaryIdentification    string                     `json:"secondary_identification"`
@@ -85,12 +85,12 @@ func (a *Account) String() string {
 	return fmt.Sprintf("%s", a)
 }
 
-func (a *Account) Json() string {
+func (a Account) Json() string {
 	b, err := json.Marshal(a)
 	if err != nil {
 		panic (err)
 	}
-	return fmt.Sprintf("%#v", b)
+	return fmt.Sprintf("%s", b)
 }
 
 // Accounts list
