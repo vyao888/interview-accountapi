@@ -1,5 +1,10 @@
 package data
 
+import (
+	"fmt"
+	"encoding/json"
+)
+
 // Status of an Account
 type Status int
 
@@ -74,6 +79,18 @@ type Account struct {
 	PrivateIdentification      AccountHolder              `json:"private_identification"`
 	OrganisationIdentification AccountHolderAsOranization `json:"organisation_identification"`
 	Relationships              Relationships              `json:"relationships"`
+}
+
+func (a *Account) String() string {
+	return fmt.Sprintf("%s", a)
+}
+
+func (a *Account) Json() string {
+	b, err := json.Marshal(a)
+	if err != nil {
+		panic (err)
+	}
+	return fmt.Sprintf("%#v", b)
 }
 
 // Accounts list
