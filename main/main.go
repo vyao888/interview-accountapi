@@ -68,8 +68,7 @@ func main() {
 		}
 
 		for _, err := range err.(validator.ValidationErrors) {
-			s:= fmt.Sprintf("%s:%s:%s", err.Namespace(), err.Tag(), err.Value())
-			fmt.Println(s)
+			fmt.Printf("%s:%s:%s\n", err.Namespace(), err.Tag(), err.Value())
 		}
 
 	}
