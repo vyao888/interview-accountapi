@@ -3,11 +3,10 @@ package data
 import (
 	"fmt"
 	"github.com/go-playground/validator/v10"
-	"github.com/hashicorp/go-hclog"
 	"regexp"
 )
 
-func ValidateAccount(acc Account, l hclog.Logger) (bool, error) {
+func ValidateAccount(acc Account) (bool, error) {
 	v := NewValidator()
 
 	err := v.Struct(acc)
