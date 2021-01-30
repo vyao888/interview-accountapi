@@ -78,6 +78,14 @@ func main() {
 	e := *a[0]
 	fmt.Printf("%s", e)
 	fmt.Printf("%s", data.Account.Json(e))
+	_, err = data.ValidateAccount(e)
+
+	if err != nil {
+		for _, err := range err.(validator.ValidationErrors) {
+			l.Error("Validation failed", err.Field() + ":" + err.Tag())
+		}
+	}
+
 
 	ac := &Actor{
 			Name:      [4]string{"Jeff Page"},

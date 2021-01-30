@@ -14,6 +14,10 @@ const (
 	confirmed
 )
 
+func (s Status) String() string {
+	return [...]string{"failed", "pending", "confirmed"}[s]
+}
+
 // Classification of an Account
 type Classification int
 
@@ -23,17 +27,22 @@ const (
 	Business
 )
 
+func (s Classification) String() string {
+	return [...]string{"Personal", "Business"}[s]
+}
+
+
 // Actor of an Organization
 type Actor struct {
 	Name      [4]string `json:"name" validate:"alpha"`
-	BirthDate string `json:"birth_date" validate:"datetime"`
+	BirthDate string `json:"birth_date" validate:"date"`
 	Residency string `json:"residency" validate:"uppercase,len=2"`
 }
 
 // AccountHolder as a person
 type AccountHolder struct {
 	Identification string   `json:"identification" validate:"unique"`
-	BirthDate      string   `json:"birth_date" validate:"datetime"`
+	BirthDate      string   `json:"birth_date" validate:"date"`
 	BirthCountry   string   `json:"birth_country" validate:"uppercase, len=2"`
 	Address        []string `json:"address" validate:"alphanum"`
 	City           string   `json:"city" validate:"alpha"`
