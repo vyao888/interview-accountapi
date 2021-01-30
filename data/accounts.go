@@ -81,6 +81,26 @@ type Account struct {
 	Relationships              Relationships              `json:"relationships"`
 }
 
+// Address houses a users address information
+type Address struct {
+	Street string `json:"street" validate:"required"`
+	City   string `json:"city" validate:"required"`
+	Planet string `json:"planet" validate:"required"`
+	Phone  string `json:"phone" validate:"required"`
+}
+
+type User struct {
+	FirstName      string     `validate:"required,alpha"`
+	LastName       string     `validate:"required,alpha"`
+	Age            uint8      `validate:"gte=0,lte=130"`
+	Email          string     `validate:"required,email"`
+	FavouriteColor string     `validate:"iscolor"`                // alias for 'hexcolor|rgb|rgba|hsl|hsla'
+	Addresses      []*Address `validate:"required,dive,required"` // a person can have a home and cottage...
+	AddressLines   []string   `json:"address-lines"`
+	Name      [4]string `json:"name" validate:"omitempty,alphanum"`
+	BirthDate string `json:"birth_date" validate:"date"`
+}
+
 func (a *Account) String() string {
 	return fmt.Sprintf("%s", a)
 }

@@ -23,17 +23,18 @@ func ValidateAccount(acc Account) (bool, error) {
 
 		for _, err := range err.(validator.ValidationErrors) {
 
-			fmt.Println(err.Namespace()) // can differ when a custom TagNameFunc is registered or
-			fmt.Println(err.Field())     // by passing alt name to ReportError like below
-			fmt.Println(err.StructNamespace())
-			fmt.Println(err.StructField())
-			fmt.Println(err.Tag())
-			fmt.Println(err.ActualTag())
-			fmt.Println(err.Kind())
-			fmt.Println(err.Type())
-			fmt.Println(err.Value())
-			fmt.Println(err.Param())
-			fmt.Println()
+			//fmt.Println(err.Namespace()) // can differ when a custom TagNameFunc is registered or
+			//fmt.Println(err.Field())     // by passing alt name to ReportError like below
+			//fmt.Println(err.StructNamespace())
+			//fmt.Println(err.StructField())
+			//fmt.Println(err.Tag())
+			//fmt.Println(err.Field())
+			//fmt.Println(err.Kind())
+			//fmt.Println(err.Type())
+			//fmt.Println(err.Value())
+			//fmt.Println(err.Param())
+			//fmt.Println()
+			fmt.Println("$s:%s:%s:%s", err.Namespace(), err.Field(), err.Tag(), err.Param())
 		}
 
 		// from here you can create your own error messages in whatever language you wish
@@ -43,13 +44,8 @@ func ValidateAccount(acc Account) (bool, error) {
 }
 
 func ValidateDate(fl validator.FieldLevel) bool {
-	re := regexp.MustCompile(`(^\\d{4})-((?<=/)\\d{2}(?=/))-(\\d{2}$)`)
+	re := regexp.MustCompile(`^\d{4}-\d{2}-\d{2}$`)
 	date := re.FindAllString(fl.Field().String(), -1)
-
-	if len(date) == 1 {
-		return true
-	}
-
-	return false
+	return len(date) == 1
 }
 
