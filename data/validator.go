@@ -22,22 +22,9 @@ func ValidateAccount(acc Account) (bool, error) {
 		}
 
 		for _, err := range err.(validator.ValidationErrors) {
-
-			//fmt.Println(err.Namespace()) // can differ when a custom TagNameFunc is registered or
-			//fmt.Println(err.Field())     // by passing alt name to ReportError like below
-			//fmt.Println(err.StructNamespace())
-			//fmt.Println(err.StructField())
-			//fmt.Println(err.Tag())
-			//fmt.Println(err.Field())
-			//fmt.Println(err.Kind())
-			//fmt.Println(err.Type())
-			//fmt.Println(err.Value())
-			//fmt.Println(err.Param())
-			//fmt.Println()
-			fmt.Println("$s:%s:%s:%s", err.Namespace(), err.Field(), err.Tag(), err.Param())
+			fmt.Printf("%s:%s:%s\n", err.Namespace(), err.Tag(), err.Value())
 		}
 
-		// from here you can create your own error messages in whatever language you wish
 		return false, err
 	}
 	return true, nil
