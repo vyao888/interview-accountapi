@@ -43,10 +43,10 @@ type Actor struct {
 type AccountHolder struct {
 	Identification string   `json:"identification" validate:"unique"`
 	BirthDate      string   `json:"birth_date" validate:"date"`
-	BirthCountry   string   `json:"birth_country" validate:"uppercase, len=2"`
+	BirthCountry   string   `json:"birth_country" validate:"uppercase,len=2"`
 	Address        []string `json:"address" validate:"alphanum"`
 	City           string   `json:"city" validate:"alpha"`
-	Country        string   `json:"country" validate:"uppercase, len=2"`
+	Country        string   `json:"country" validate:"uppercase,len=2"`
 }
 
 // AccountHolderAsOranization account holder
@@ -69,12 +69,12 @@ type Relationships struct {
 
 // Account details definition
 type Account struct {
-	Country                    string                     `json:"country" validate:"uppercase, len=2"`
-	BaseCurrency               string                     `json:"base_currency" validate:"uppercase, len=3"`
-	BankID                     string                     `json:"bank_id" validate:"uppercase, max=11"`
+	Country                    string                     `json:"country" validate:"uppercase,len=2"`
+	BaseCurrency               string                     `json:"base_currency" validate:"uppercase,len=3"`
+	BankID                     string                     `json:"bank_id" validate:"uppercase,max=11"`
 	BankIDCode                 string                     `json:"bank_id_code" validate:"uppercase"`
 	AccountNumber              string                     `json:"account_number"`
-	BIC                        string                     `json:"bic" validate:"alphanum, min=8|11"`
+	BIC                        string                     `json:"bic" validate:"alphanum,len=8|len=11"`
 	IBAN                       string                     `json:"iban" validate:"alphanum"`
 	CustomerID                 string                     `json:"customer_id"`
 	Name                       [4]string                  `json:"name" validate:"alpha"`

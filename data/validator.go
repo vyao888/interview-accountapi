@@ -8,7 +8,7 @@ import (
 
 func ValidateAccount(acc Account) (bool, error) {
 	v := NewValidator()
-
+	v.RegisterValidation("date", ValidateDate)
 	err := v.Struct(acc)
 
 	if err != nil {

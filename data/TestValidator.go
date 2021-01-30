@@ -47,7 +47,7 @@ func validateStruct() {
 
 	// returns nil or ValidationErrors ( []FieldError )
 	validate := NewValidator()
-	validate.RegisterValidation("datetime", validateDate)
+	validate.RegisterValidation("date", validateDate)
 	err := validate.Struct(user)
 	if err != nil {
 		fmt.Println("Validation failed.")

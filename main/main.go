@@ -77,7 +77,7 @@ func main() {
 	fmt.Println(len(a))
 	e := *a[0]
 	fmt.Printf("%s", e)
-	fmt.Printf("%s", data.Account.Json(e))
+	fmt.Printf("%s\n", data.Account.Json(e))
 	_, err = data.ValidateAccount(e)
 
 	if err != nil {
