@@ -62,8 +62,8 @@ func main() {
 		// an invalid value for validation such as interface with nil
 		// value most including myself do not usually have code like this.
 		if _, ok := err.(*validator.InvalidValidationError); ok {
-			fmt.Println(err)
-			l.Error("failed validation", err)
+			e := err.(*validator.InvalidValidationError)
+			l.Error(data.InvalidValidationError(e))
 			return
 		}
 

@@ -17,7 +17,7 @@ func ValidateAccount(acc Account) (bool, error) {
 		// an invalid value for validation such as interface with nil
 		// value most including myself do not usually have code like this.
 		if _, ok := err.(*validator.InvalidValidationError); ok {
-			fmt.Println(err)
+			err.Error()
 			return false, err
 		}
 
@@ -40,3 +40,8 @@ func ValidationError(err validator.FieldError) string {
 	return fmt.Sprintf("%s:%s:%s", err.Namespace(), err.Tag(), err.Value())
 }
 
+
+func InvalidValidationError(err validator.InvalidValidationError) string {
+	t := err.Type
+	return fmt.Sprintf("%s:%s:%s", t.Kind(), t.Key(), t.Name())
+}
