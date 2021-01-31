@@ -34,7 +34,7 @@ func (s Classification) String() string {
 
 // Actor of an Organization
 type Actor struct {
-	Name      [4]string `json:"name" validate:"alpha,dive"`
+	Name      [4]string `json:"name" validate:"omitempty,alpha,dive"`
 	BirthDate string `json:"birth_date" validate:"date"`
 	Residency string `json:"residency" validate:"uppercase,len=2"`
 }
@@ -44,7 +44,7 @@ type AccountHolder struct {
 	Identification string   `json:"identification" validate:"unique"`
 	BirthDate      string   `json:"birth_date" validate:"date"`
 	BirthCountry   string   `json:"birth_country" validate:"uppercase,len=2"`
-	Address        []string `json:"address" validate:"alphanum,dive"`
+	Address        []string `json:"address" validate:"omitempty,alphanum,dive"`
 	City           string   `json:"city" validate:"alpha"`
 	Country        string   `json:"country" validate:"uppercase,len=2"`
 }
@@ -77,8 +77,8 @@ type Account struct {
 	BIC                        string                     `json:"bic" validate:"alphanum,len=8|len=11"`
 	IBAN                       string                     `json:"iban" validate:"alphanum"`
 	CustomerID                 string                     `json:"customer_id"`
-	Name                       [4]string                  `json:"name" validate:"alpha,dive"`
-	AlternativeNames           [3]string                  `json:"alternative_names" validate:"max=140,dive"`
+	Name                       [4]string                  `json:"name" validate:"omitempty,alpha,dive"`
+	AlternativeNames           [3]string                  `json:"alternative_names" validate:"omitempty,max=140,dive"`
 	AccountClassification      Classification              `json:"account_classification"`
 	JointAccount               bool                       `json:"joint_account"`
 	AccountMatchingOptOut      bool                       `json:"account_matching_opt_out"`

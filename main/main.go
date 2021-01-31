@@ -98,22 +98,22 @@ func main() {
 			l.Error("Validation failed", err.Field() + ":" + err.Tag())
 		}
 	}
-	//fmt.Printf("%s", b)
+//	fmt.Printf("%s", b)
 
-	//p := &data.AccountHolder{
-	//	Identification: "13YH458762",
-	//	BirthDate:      "2017-07-23",
-	//	BirthCountry:   "GB",
-	//	Address:        []string{"10 Avenue des Champs"},
-	//	City:           "London",
-	//	Country:        "GB",
-	//}
-	//
-	//err = validate.Struct(p)
-	//if err != nil {
-	//	l.Error("AccountHolder validation failed.", err)
-	//}
-	//fmt.Printf("%s", b)
+	p := &data.AccountHolder{
+		Identification: "13YH458762",
+		BirthDate:      "2017-07-23",
+		BirthCountry:   "GB",
+		Address:        []string{"10 Avenue des Champs"},
+		City:           "London",
+		Country:        "GB",
+	}
+
+	err = validate.Struct(p)
+	if err != nil {
+		l.Error("AccountHolder validation failed.", err)
+	}
+//	fmt.Printf("%s", b)
 
 }
 
