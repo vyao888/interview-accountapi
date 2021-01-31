@@ -22,7 +22,7 @@ func ValidateAccount(acc Account) (bool, error) {
 		}
 
 		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Printf("%s:%s:%s\n", err.Namespace(), err.Tag(), err.Value())
+			fmt.Printf(ValidationError(err))
 		}
 
 		return false, err
@@ -34,5 +34,9 @@ func ValidateDate(fl validator.FieldLevel) bool {
 	re := regexp.MustCompile(`^\d{4}-\d{2}-\d{2}$`)
 	date := re.FindAllString(fl.Field().String(), -1)
 	return len(date) == 1
+}
+
+func ValidationError(err validator.FieldError) string {
+	return fmt.Sprintf("%s:%s:%s", err.Namespace(), err.Tag(), err.Value())
 }
 

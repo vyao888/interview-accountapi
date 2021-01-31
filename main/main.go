@@ -68,7 +68,7 @@ func main() {
 		}
 
 		for _, err := range err.(validator.ValidationErrors) {
-			fmt.Printf("%s:%s:%s\n", err.Namespace(), err.Tag(), err.Value())
+			fmt.Printf(data.ValidationError(err))
 		}
 
 	}
@@ -78,13 +78,13 @@ func main() {
 	e := *a[0]
 	fmt.Printf("%s", e)
 	fmt.Printf("%s\n", data.Account.Json(e))
-	_, err = data.ValidateAccount(e)
-
-	if err != nil {
-		for _, err := range err.(validator.ValidationErrors) {
-			l.Error("Validation failed", err.Field() + ":" + err.Tag())
-		}
-	}
+	//_, err = data.ValidateAccount(e)
+	//
+	//if err != nil {
+	//	for _, err := range err.(validator.ValidationErrors) {
+	//		l.Error("Validation failed", err.Field() + ":" + err.Tag())
+	//	}
+	//}
 
 
 	ac := &Actor{

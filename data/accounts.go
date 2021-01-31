@@ -105,8 +105,8 @@ type User struct {
 	Email          string     `validate:"required,email"`
 	FavouriteColor string     `validate:"iscolor"`                // alias for 'hexcolor|rgb|rgba|hsl|hsla'
 	Addresses      []*Address `validate:"required,dive,required"` // a person can have a home and cottage...
-	AddressLines   []string   `json:"address-lines"`
-	Name      [4]string `json:"name" validate:"omitempty,alphanum"`
+	AddressLines   []string   `json:"address-lines" validate:"omitempty,alpha,dive"`
+	Name      [4]string `json:"name" validate:"omitempty,dive,alphanum"`
 	BirthDate string `json:"birth_date" validate:"date"`
 }
 
